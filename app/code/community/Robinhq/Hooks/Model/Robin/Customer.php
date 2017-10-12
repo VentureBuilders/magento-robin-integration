@@ -38,9 +38,10 @@ class Robinhq_Hooks_Model_Robin_Customer
                         ->date('Y-m-d', strtotime($customer->getCreatedAt())),
                 'order_count' => $orderCount,
                 'total_spent' => $formattedTotalSpent,
-                'total_revenue' => $lifetime->getLifetime(),
                 'panel_view' => [
-                        'Reward_points' => $rewardPoints,
+//                        'Reward_points' => $rewardPoints,
+                    'latest_order_date' => Mage::getModel('core/date')
+                        ->date('Y-m-d', strtotime($latestOrder->getCreatedAt()))
                 ],
                 'name' => $customer->getName(),
                 'currency' => Mage::app()
@@ -48,8 +49,6 @@ class Robinhq_Hooks_Model_Robin_Customer
                         ->getCurrentCurrencyCode(),
                 'phone_number' => $phoneNumber,
                 'reward_points' => $rewardPoints,
-                'latest_order_date' => Mage::getModel('core/date')
-                        ->date('Y-m-d', strtotime($latestOrder->getCreatedAt()))
         ];
     }
 

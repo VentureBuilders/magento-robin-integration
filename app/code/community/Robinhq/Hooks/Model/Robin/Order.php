@@ -64,15 +64,16 @@ class Robinhq_Hooks_Model_Robin_Order
     protected function getBaseInfo(Mage_Sales_Model_Order $order)
     {
         $date = $order->getCreatedAt();
-        $orderByDate = Mage::getModel('core/date')
-                ->date('Y/m/d', strtotime($date));
+        // Use default date, so timezone isn't taken into account
+        // gmt is used by default in the db, zend/magento converts to timezone automaticly
+        $orderByDate = date('Y-m-d\TH:i:s\Z', strtotime($date));
 
         return [
                 "order_number" => $order->getIncrementId(),
                 "email_address" => $order->getCustomerEmail(),
                 "url" => $this->getOrderAdminUrl($order),
                 "order_by_date" => $orderByDate,
-                "revenue" => $order->getBaseGrandTotal(),
+                "revenue" => (float)$order->getBaseGrandTotal(),
                 "list_view" => [
                         "order_number" => $order->getIncrementId(),
                         "date" => $date,

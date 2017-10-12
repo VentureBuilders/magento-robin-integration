@@ -76,7 +76,7 @@ class Robinhq_Hooks_Model_Api
             throw new Exception('Missing API configuration, go to System -> Configuration -> ROBINHQ -> Settings and fill in your API credentials');
         }
 
-        $url = $apiUrl . '/' . $request;
+        $url = $apiUrl . '/' . ltrim($request, '/');
 
         $this->helper->log("Posting to [" . $url . "]");
 
