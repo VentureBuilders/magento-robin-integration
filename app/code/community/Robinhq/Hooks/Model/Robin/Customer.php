@@ -39,16 +39,15 @@ class Robinhq_Hooks_Model_Robin_Customer
                 'order_count' => $orderCount,
                 'total_spent' => $formattedTotalSpent,
                 'panel_view' => [
-//                        'Reward_points' => $rewardPoints,
                     'latest_order_date' => Mage::getModel('core/date')
-                        ->date('Y-m-d', strtotime($latestOrder->getCreatedAt()))
+                        ->date('Y-m-d', strtotime($latestOrder->getCreatedAt())),
+                    'reward_points' => $rewardPoints,
                 ],
                 'name' => $customer->getName(),
                 'currency' => Mage::app()
                         ->getStore()
                         ->getCurrentCurrencyCode(),
                 'phone_number' => $phoneNumber,
-                'reward_points' => $rewardPoints,
         ];
     }
 
