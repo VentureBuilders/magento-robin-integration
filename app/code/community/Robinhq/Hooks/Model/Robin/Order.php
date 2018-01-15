@@ -49,7 +49,8 @@ class Robinhq_Hooks_Model_Robin_Order
                 $this->getInvoices($order),
         ]);
         Mage::dispatchEvent('robin_hooks_order_details', [
-                'order' => $this,
+                'order_hook' => $this,
+                'order' => $order,
                 'data' => $data,
         ]);
         return $data->toArray();
